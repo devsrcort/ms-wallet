@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+  ms-srt-wallet:
+    container_name: ms-srt-wallet
+    labels:
+      #- "traefik.backend=ms-srt-wallet"
+      - "traefik.enable=true"
+      - "traefik.http.routers.ms-srt-wallet.rule=PathPrefix(`/wallet`)"
+    user: root # avoids ton of volume mounting headaches in dev mode.
+    build:
+      context: .
+      target: build
+    volumes:
+      - ./:/opt/app
+      # @see: http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html#the-node_modules-volume-trick
+      - /opt/app/node_modules
+    ports:
+      - 33127:5502
+    environment:
+      - NODE_ENV=dev
+      - NODE_HOT_RELOAD=1
+      - NODE_LOGGER_GRANULARLEVELS=1
+      - NODE_CONFIG_DISABLE_FILE_WATCH="Y"
+      #- PORT=5502 # this is overriden in shell/start-dev.sh since wait-for.sh compromises it from here
+    # @see: https://docs.docker.com/compose/startup-order/
+    command: ./shell/start-dev.sh

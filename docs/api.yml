@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: SRT Web3 Interface service
+  description: |
+    API Spec for SRT Web3 interface System
+  version: 1.0.1
+servers:
+  - url: http://api.example.com/v1
+    description: Production Server
+paths:
+  /create_account:
+    get:
+      summary: Create new wallet for SRT Private sale
+      description: |
+        Create new wallet for SRT Private sale
+
+        Example request:
+        ```
+          GET http://api.example.com/v1/create_account
+        ```
+
+      responses:
+        '200':    # success response
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    wallet_address:
+                      type: string
+                      example: "0x2394adfaf2"
+                    private_key:
+                      type: string
+                      example: "0x2394adfaf2"
+
+                example:
+                  wallet_address: "0x2394adfaf2"
+                  private_key: "0x2394adfaf2"
+
+  /approve:
+    get:
+      summary: Permmit allowance for transfer token
+      description: |
+        Permmit allowance for transfer token
+
+        Example request:
+        ```
+          GET http://api.example.com/v1/approve?from_addr="0x2394adfaf2"&to_addr="0x3523df3as2"
+        ```
+      parameters:
+        - name: from_addr
+          in: query
+          required: true
+          description: client wallet address
+          schema:
+            type : string
+          example: "0x2394adfaf2"
+        - name: to_addr
+          in: query
+          required: true
+          description: master wallet address
+          schema:
+            type : string
+          example: "0x2394adfaf2"
+      responses:
+        '200':    # success response
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+  /balanceof:
+    get:
+      summary: Get balance of wallet
+      description: |
+        Get balance of wallet
+
+        Example request:
+        ```
+          GET http://api.example.com/v1/balanceof?addr="0x2394adfaf2"
+        ```
+      parameters:
+        - name: addr
+          in: query
+          required: true
+          description: client wallet address
+          schema:
+            type : string
+          example: "0x2394adfaf2"
+      responses:
+        '200':    # success response
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    balance:
+                      type: number
+                      example: 100000
+
+  /lock:
+    get:
+      summary: Lock member wallet
+      description: |
+        Lock member wallet
+
+        Example request:
+        ```
+          GET http://api.example.com/v1/lock?addr="0x2394adfaf2"
+        ```
+      parameters:
+        - name: addr
+          in: query
+          required: true
+          description: client wallet address
+          schema:
+            type : string
+          example: "0x2394adfaf2"
+      responses:
+        '200':    # success response
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+  /unlock:
+    get:
+      summary: unlock member wallet
+      description: |
+        unlock member wallet
+
+        Example request:
+        ```
+          GET http://api.example.com/v1/unlock?addr="0x2394adfaf2"
+        ```
+      parameters:
+        - name: addr
+          in: query
+          required: true
+          description: client wallet address
+          schema:
+            type : string
+          example: "0x2394adfaf2"
+      responses:
+        '200':    # success response
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
