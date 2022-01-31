@@ -10,7 +10,7 @@ require('app-module-path').addPath(path.join(__dirname, '/lib'));
 // Add all routes and route-handlers for your service/app here:
 function serviceRoutes(app) {
     // For Liveness Probe, defaults may be all you need.
-    const livenessCheck = healthcheck({ "path": "/ping" });
+    const livenessCheck = healthcheck({ "path": "/wallet/ping" });
     app.use(livenessCheck.express());
 
     // For readiness check, let's also test the DB
