@@ -9,7 +9,7 @@ USER root
 RUN rm -rf node_modules \
  && chown -R node /opt/app
 
-USER node
+#USER node
 
 
 FROM base as release
@@ -35,6 +35,6 @@ RUN npm install -g nodemon \
  && chown -R node /opt/app
 RUN chmod 755 ./shell/run-db-migration.sh
 
-USER node
+#USER node
 
 ENTRYPOINT ./shell/run-db-migration.sh && node server.js
