@@ -38,9 +38,9 @@ services:
     ## ports:
     ##   - 5306:3306
     ports:
-      - 33129:3306
+      - 33130:3306
     expose:
-      - 33129
+      - 33130
     env_file:
       - ./database.env
     volumes:
