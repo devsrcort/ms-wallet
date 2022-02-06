@@ -20,7 +20,7 @@ RUN npm install --only=production \
  && chown -R node /opt/app
 RUN chmod 755 ./shell/run-db-migration.sh
 
-# USER node
+USER node
 ENV HOME_DIR=/opt/app \
     NODE_ENV=production \
     PORT=5502
@@ -35,6 +35,7 @@ RUN npm install -g nodemon \
  && chown -R node /opt/app
 RUN chmod 755 ./shell/run-db-migration.sh
 
-#USER node
+USER node
+ENV PORT=5502
 
 ENTRYPOINT ./shell/run-db-migration.sh && node server.js
