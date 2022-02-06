@@ -18,13 +18,14 @@ USER root
 RUN npm install --only=production \
  #&& apk add --no-cache tini \
  && chown -R node /opt/app
+RUN chmod 755 ./shell/run-db-migration.sh
 
-USER node
+# USER node
 ENV HOME_DIR=/opt/app \
     NODE_ENV=production \
     PORT=5502
 
-ENTRYPOINT node server.js
+ENTRYPOINT ./shell/run-db-migration.sh && node server.js
 
 FROM base as build
 
@@ -32,7 +33,8 @@ USER root
 RUN npm install -g nodemon \
  && npm install \
  && chown -R node /opt/app
+RUN chmod 755 ./shell/run-db-migration.sh
 
 USER node
 
-ENTRYPOINT node server.js
+ENTRYPOINT ./shell/run-db-migration.sh && node server.js
