@@ -1,12 +1,12 @@
 version: "3.4"
 
 services:
-  ms-srt-wallet:
-    container_name: ms-srt-wallet
+  ms-srt-users:
+    container_name: ms-srt-users
     labels:
-      #- "traefik.backend=ms-srt-wallet"
+      #- "traefik.backend=ms-srt-users"
       - "traefik.enable=true"
-      - "traefik.http.routers.ms-srt-wallet.rule=PathPrefix(`/wallet`)"
+      - "traefik.http.routers.ms-srt-users.rule=PathPrefix(`/wallet`)"
     user: root # avoids ton of volume mounting headaches in dev mode.
     build:
       context: .
@@ -17,6 +17,10 @@ services:
       - /opt/app/node_modules
     ports:
       - 33127:5502
+    env_file:
+      - ./database.env
+    links:
+      - ms-srt-users-db
     environment:
       - NODE_ENV=dev
       - NODE_HOT_RELOAD=1
@@ -24,4 +28,24 @@ services:
       - NODE_CONFIG_DISABLE_FILE_WATCH="Y"
       #- PORT=5502 # this is overriden in shell/start-dev.sh since wait-for.sh compromises it from here
     # @see: https://docs.docker.com/compose/startup-order/
-    command: ./shell/start-dev.sh
+    command: ./shell/wait-for.sh ms-srt-users-db:33129 -- ./shell/start-dev.sh
+
+  ms-srt-users-db:
+    container_name: ms-srt-users-db
+    image: mysql:5.7
+    # port mapping not needed for the app, but convenient in debugging
+    # to use some GUI tool (e.g. SequelPro) against the DB, on the host
+    ## ports:
+    ##   - 5306:3306
+    ports:
+      - 33129:3306
+    expose:
+      - 33129
+    env_file:
+      - ./database.env
+    volumes:
+      - ms_srt_users_db_vol:/var/lib/mysql
+    restart: always
+
+volumes:
+  ms_srt_users_db_vol:
