@@ -11,7 +11,6 @@ RUN rm -rf node_modules \
 
 #USER node
 
-
 FROM base as release
 
 USER root
@@ -19,8 +18,9 @@ RUN npm install --only=production \
  #&& apk add --no-cache tini \
  && chown -R node /opt/app
 RUN chmod 755 ./shell/run-db-migration.sh
+RUN chmod 755 ./shell/wait-for.sh
 
-USER node
+#USER node
 ENV HOME_DIR=/opt/app \
     NODE_ENV=production \
     PORT=5502
@@ -34,8 +34,9 @@ RUN npm install -g nodemon \
  && npm install \
  && chown -R node /opt/app
 RUN chmod 755 ./shell/run-db-migration.sh
+RUN chmod 755 ./shell/wait-for.sh
 
-USER node
+#USER node
 ENV PORT=5502
 
 ENTRYPOINT ./shell/run-db-migration.sh && node server.js
