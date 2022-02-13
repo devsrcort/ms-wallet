@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const log = require('metalogger')();
 const healthcheck = require('maikai');
 const hbs = require('hbs');
+const cors = require('cors');
 
 require('app-module-path').addPath(path.join(__dirname, '/lib'));
 
@@ -23,7 +24,11 @@ function serviceRoutes(app) {
 
     /* eslint-disable global-require */
     /* eslint-disable global-require */
+    let corsOptions = {
+        origin: 'http://srt-wallet.io'
+    }
 
+    app.use(cors(corsOptions));
     app.use('/wallet', require('wallet')); // attach to sub-route
 
     /* eslint-enable global-require */

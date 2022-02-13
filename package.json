@@ -19,6 +19,7 @@
         "bluebird": "^3.7.2",
         "body-parser": "^1.19.0",
         "config": "^3.3.6",
+        "cors": "^2.8.5",
         "db-migrate": "^0.11.12",
         "db-migrate-mysql": "^2.1.2",
         "duration": "^0.2.2",
