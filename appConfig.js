@@ -25,7 +25,7 @@ function serviceRoutes(app) {
     /* eslint-disable global-require */
     /* eslint-disable global-require */
     let corsOptions = {
-        origin: 'http://srt-wallet.io'
+        origin: 'https://srt-wallet.io'
     }
 
     app.use(cors(corsOptions));
