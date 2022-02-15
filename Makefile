@@ -60,11 +60,11 @@ migrate-local:
 
 .PHONY: migrate
 migrate: start
-	docker-compose -p ${project} exec ${service} make migrate-local
+	docker-compose -p ${project} exec ${service} node_modules/db-migrate/bin/db-migrate up -e ${NODE_ENV}
 
 .PHONY: shell
 shell:
-	docker-compose -p ${project} exec ${service} sh
+	docker-compose -p ${project} exec ${service} /bin/sh
 
 .PHONY: mysql
 mysql:

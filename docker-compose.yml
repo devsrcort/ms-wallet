@@ -28,7 +28,7 @@ services:
       - NODE_CONFIG_DISABLE_FILE_WATCH="Y"
       #- PORT=5502 # this is overriden in shell/start-dev.sh since wait-for.sh compromises it from here
     # @see: https://docs.docker.com/compose/startup-order/
-    command: ./shell/wait-for.sh ms-srt-wallet-db:33130 -- ./shell/start-dev.sh
+    command: ./shell/wait-for.sh ms-srt-wallet-db:3306 -- ./shell/start-dev.sh
 
   ms-srt-wallet-db:
     container_name: ms-srt-wallet-db
@@ -38,9 +38,9 @@ services:
     ## ports:
     ##   - 5306:3306
     ports:
-      - 33130:3306
+      - 3306
     expose:
-      - 33130
+      - 3306
     env_file:
       - ./database.env
     volumes:
