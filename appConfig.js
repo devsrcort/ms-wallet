@@ -23,7 +23,7 @@ function serviceRoutes(app) {
     app.use(check.express());
 
     /* eslint-disable global-require */
-    const safesitelist = ["https://srt-wallet.io", "https://app.srt-wallet.io"];
+    const safesitelist = ["https://srt-wallet.io", "https://app.srt-wallet.io", "https://admin.srt-wallet.io"];
 
     const corsOptions = {
         origin: function(origin, callback) {
