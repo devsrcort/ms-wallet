@@ -38,11 +38,7 @@ function serviceRoutes(app) {
     app.use(cors(corsOptions));
     app.use("/wallet", require("wallet")); // attach to sub-route
 
-    const server = app.listen(process.env.SOCKET_PORT, () => {
-        console.log("Wait for Port :", process.env.SOCKET_PORT);
-    });
-
-    webSocket(server, app);
+    webSocket(app.http, app);
     /* eslint-enable global-require */
 }
 
