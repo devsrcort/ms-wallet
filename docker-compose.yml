@@ -17,6 +17,7 @@ services:
       - /opt/app/node_modules
     ports:
       - 33127:5502
+      - 43127:5702
     env_file:
       - ./database.env
     links:

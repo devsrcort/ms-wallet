@@ -1,3 +1,4 @@
 app:
   something: dev
   port: 5502
+  socket_port: 5702

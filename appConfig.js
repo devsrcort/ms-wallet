@@ -7,6 +7,8 @@ const hbs = require("hbs");
 const cors = require("cors");
 
 require("app-module-path").addPath(path.join(__dirname, "/lib"));
+const webSocket = require("./lib/wallet/controllers/socket");
+
 
 // Add all routes and route-handlers for your service/app here:
 function serviceRoutes(app) {
@@ -23,7 +25,7 @@ function serviceRoutes(app) {
     app.use(check.express());
 
     /* eslint-disable global-require */
-    const safesitelist = ["https://srt-wallet.io", "https://app.srt-wallet.io", "https://admin.srt-wallet.io"];
+    const safesitelist = ["https://srt-wallet.io", "https://app.srt-wallet.io", "https://admin.srt-wallet.io", "*", "http://localhost:6002"];
 
     const corsOptions = {
         origin: function(origin, callback) {
@@ -36,6 +38,11 @@ function serviceRoutes(app) {
     app.use(cors(corsOptions));
     app.use("/wallet", require("wallet")); // attach to sub-route
 
+    const server = app.listen(process.env.SOCKET_PORT, () => {
+        console.log("Wait for Port :", process.env.SOCKET_PORT);
+    });
+
+    webSocket(server, app);
     /* eslint-enable global-require */
 }
 
