@@ -5,10 +5,12 @@ const log = require("metalogger")();
 const healthcheck = require("maikai");
 const hbs = require("hbs");
 const cors = require("cors");
+const dotenv = require('dotenv');
 
 require("app-module-path").addPath(path.join(__dirname, "/lib"));
 const webSocket = require("./lib/wallet/controllers/socket");
 
+dotenv.config();
 
 // Add all routes and route-handlers for your service/app here:
 function serviceRoutes(app) {
@@ -25,7 +27,19 @@ function serviceRoutes(app) {
     app.use(check.express());
 
     /* eslint-disable global-require */
-    const safesitelist = ["https://srt-wallet.io", "https://app.srt-wallet.io", "https://admin.srt-wallet.io", "*", "http://localhost:39999", "http://localhost:33123"];
+    const safesitelist =
+        process.env.NODE_ENV == "production" ? [
+            "https://srt-wallet.io",
+            "https://app.srt-wallet.io",
+            "https://admin.srt-wallet.io",
+        ] : [
+            "https://dev.srt-wallet.io",
+            "https://dev.app.srt-wallet.io",
+            "https://dev.admin.srt-wallet.io",
+            "*",
+            "http://localhost:39999",
+            "http://localhost:33123",
+        ];
 
     const corsOptions = {
         origin: function(origin, callback) {
