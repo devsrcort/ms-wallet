@@ -5,7 +5,7 @@ const log = require("metalogger")();
 const healthcheck = require("maikai");
 const hbs = require("hbs");
 const cors = require("cors");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
 require("app-module-path").addPath(path.join(__dirname, "/lib"));
 const webSocket = require("./lib/wallet/controllers/socket");
@@ -33,12 +33,12 @@ function serviceRoutes(app) {
             "https://app.srt-wallet.io",
             "https://admin.srt-wallet.io",
         ] : [
+            "http://localhost:33123",
             "https://dev.srt-wallet.io",
             "https://dev.app.srt-wallet.io",
             "https://dev.admin.srt-wallet.io",
+            // "http://localhost:39999",
             "*",
-            "http://localhost:39999",
-            "http://localhost:33123",
         ];
 
     const corsOptions = {
@@ -49,10 +49,10 @@ function serviceRoutes(app) {
         credentials: true,
     };
 
+    webSocket(app.http, app);
+
     app.use(cors(corsOptions));
     app.use("/wallet", require("wallet")); // attach to sub-route
-
-    webSocket(app.http, app);
     /* eslint-enable global-require */
 }
 

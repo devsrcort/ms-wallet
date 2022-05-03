@@ -16,7 +16,7 @@ services:
       # @see: http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html#the-node_modules-volume-trick
       - /opt/app/node_modules
     ports:
-      - 33127:5502
+      - 38512:5502
       - 43127:5702
     env_file:
       - ./database.env
