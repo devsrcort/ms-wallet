@@ -33,7 +33,7 @@ function serviceRoutes(app) {
             "https://app.srt-wallet.io",
             "https://admin.srt-wallet.io",
         ] : [
-            // "http://localhost:33123",
+            "http://localhost:33123",
             "https://dev.srt-wallet.io",
             "https://dev.app.srt-wallet.io",
             "https://dev.admin.srt-wallet.io",
@@ -49,10 +49,10 @@ function serviceRoutes(app) {
         credentials: true,
     };
 
+    webSocket(app.http, app);
+
     app.use(cors(corsOptions));
     app.use("/wallet", require("wallet")); // attach to sub-route
-
-    webSocket(app.http, app);
     /* eslint-enable global-require */
 }
 
