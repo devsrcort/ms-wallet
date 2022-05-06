@@ -41,11 +41,11 @@
         "retry": "^0.13.1",
         "socket.io": "^2.4.1",
         "spieler": "^1.2.1",
-        "uuid": "^8.3.2"
+        "uuid": "^8.3.2",
+        "axios": "^0.21.1"
     },
     "devDependencies": {
         "after": "^0.8.1",
-        "axios": "^0.21.1",
         "chai": "^4.3.4",
         "db-migrate": "^0.11.11",
         "db-migrate-mysql": "^2.1.1",
