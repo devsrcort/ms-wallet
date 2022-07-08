@@ -66,8 +66,8 @@
     },
     "scripts": {
         "start": "nodemon -L -e js,coffee,jade,handlebars server.js",
-        "lint": "eslint lib test",
-        "pretest": "npm run lint",
+        "lint": "eslint lib test --fix",
+        "pretest": "npm run lint --fix",
         "test": "nyc mocha --bail test/ test/**/*-test.js",
         "test-cov": "nyc mocha test/ test/**/*-test.js"
     },
