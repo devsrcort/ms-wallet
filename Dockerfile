@@ -39,3 +39,4 @@ USER node
 ENV PORT=5502
 ENV SOCKET_PORT=5702
 
+ENTRYPOINT ./shell/run-db-migration.sh && node server.js
