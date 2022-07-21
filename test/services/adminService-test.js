@@ -20,7 +20,7 @@ describe("Admin service test", () => {
 
         const gasValue = await testService.calcTransferFee(testAddr, targetAddr, 1000, 100);
 
-        assert.equal(gasValue, "225896000000000", `Gas Value is Diff ${gasValue.toString()}`);
+        assert.equal(gasValue, "2263237000000000", `Gas Value is Diff ${gasValue.toString()}`);
     });
 
     it("Admin Service Test - Displayed values ", async() => {
