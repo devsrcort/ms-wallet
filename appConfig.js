@@ -8,6 +8,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 require("app-module-path").addPath(path.join(__dirname, "/lib"));
+const morgan = require("morgan");
 const webSocket = require("./lib/wallet/controllers/socket");
 
 dotenv.config();
@@ -25,7 +26,7 @@ function serviceRoutes(app) {
     // Database health check is cached for 10000ms = 10 seconds!
     check.addCheck("db", "dbQuery", advCheckers.dbCheck, { minCacheMs: 10000 });
     app.use(check.express());
-
+    app.use(morgan('dev'));
     /* eslint-disable global-require */
     const safesitelist =
         process.env.NODE_ENV == "production" ? [
